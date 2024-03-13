@@ -50,11 +50,29 @@ from requests import get, post, delete
 print(get("http://127.0.0.1:8080/api/v2/users").json())
 # Напечатать только одного
 print(get("http://127.0.0.1:8080/api/v2/users/1").json())
+#ОШИБКИ В НАПЕЧАНИИ ОДНОГО
+print(get("http://127.0.0.1:8080/api/v2/users/9000000000099").json())#Слишком большое значение
+print(get("http://127.0.0.1:8080/api/v2/users/a").json())#БУКВА ВМЕСТО ЦИФРЫ
+print(get("http://127.0.0.1:8080/api/v2/users/").json())#УСТОЕ ЗНАЧЕНИЕ
 # Удалить кого-то
 print(delete("http://127.0.0.1:8080/api/v2/users/1").json())
-# НУ и вот ещё
+#ОШИБКИ В УДАЛЕНИИ КОТО-ТО
+print(delete("http://127.0.0.1:8080/api/v2/users/34567543234234").json())#Слишком большое значение
+print(delete("http://127.0.0.1:8080/api/v2/users/a").json())#БУКВА ВМЕСТО ЦИФРЫ
+print(delete("http://127.0.0.1:8080/api/v2/users/").json())#УСТОЕ ЗНАЧЕНИЕ
+# Изменение работы по id
 print(post('http://127.0.0.1:8080/api/jobs/6',
            json={"id": 6,
                  'team_leader': 2345676543,
                  'job': 'Текст 234234234',
-#                'collaborators': "3, 4"}).json())
+                 'collaborators': "3, 4"}).json())
+print(post('http://127.0.0.1:8080/api/jobs/',#УСТОЕ ЗНАЧЕНИЕ
+           json={"id": 6,
+                 'team_leader': 2345676543,
+                 'job': 'Текст 234234234',
+                 'collaborators': "3, 4"}).json())
+print(post('http://127.0.0.1:8080/api/jobs/',#Не все обязытельные ключи
+           json={"id": 6,
+                 'job': 'Текст 234234234',
+                 'collaborators': "3, 4"}).json())
+

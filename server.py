@@ -100,7 +100,7 @@ def add_job():
 
 @app.route('/editjob/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit_job():
+def edit_job(id):
     edit_form = AddJobForm
     if request == "GET":
         db_sess = db_session.create_session()
@@ -133,7 +133,7 @@ def edit_job():
 
 @app.route('/deletejob/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delet_job():
+def delet_job(id):
     db_sess = db_session.create_session()
     job = db_sess.query(Jobs).filter(Jobs.id == id,
                                      (Jobs.team_leader == current_user.id) | (current_user.id == 1)).first()
